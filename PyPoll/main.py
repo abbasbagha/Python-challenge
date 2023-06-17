@@ -21,14 +21,15 @@ with open(election_data_path, "r", encoding="UTF-8") as electionfile:
     # print(data)
     total_votes = len(vote_data)
     winner = 0
+    candidate_results: list[str] = []
     for candidate in candidate_list:
         candidate_count = vote_data.count(candidate)
         if candidate_count > winner:
             winner = candidate_count
             winner_name = candidate
-        print(
-            f"{candidate}:   {vote_data.count(candidate)}: {(((vote_data.count(candidate))/total_votes)*100):.3f}%"
-        )
+        candidate_result: str =  f"{candidate}:   {vote_data.count(candidate)}: {(((vote_data.count(candidate))/total_votes)*100):.3f}%"
+        candidates_results.append(candidate_result)
+        print(candidate_result)
     print(f"The total votes cast: {total_votes}")
     print(winner)
     print(winner_name)
@@ -42,3 +43,4 @@ with open(election_data_path, "r", encoding="UTF-8") as electionfile:
         text_file.write("\n" f"The total votes cast: {total_votes}")
         text_file.write("\n----------------------------------------")
         text_file.write("\n" f'the winner is {winner_name}')
+        text_file.write(candidates_results)
