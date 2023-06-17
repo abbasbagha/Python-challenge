@@ -6,7 +6,7 @@ import os
 import csv
 
 # defining the path of the csv file and opening it in read format
-election_data_path = os.path.join("Resources","election_data.csv")
+election_data_path = os.path.join("Resources", "election_data.csv")
 with open(election_data_path, "r", encoding="UTF-8") as electionfile:
     input_data = csv.reader(electionfile, delimiter=",")
     header = next(input_data)  # column data headers
@@ -20,8 +20,25 @@ with open(election_data_path, "r", encoding="UTF-8") as electionfile:
     print(f'candidates : {" , ".join(candidate_list)}')
     # print(data)
     total_votes = len(vote_data)
+    winner = 0
     for candidate in candidate_list:
+        candidate_count = vote_data.count(candidate)
+        if candidate_count > winner:
+            winner = candidate_count
+            winner_name = candidate
         print(
             f"{candidate}:   {vote_data.count(candidate)}: {(((vote_data.count(candidate))/total_votes)*100):.3f}%"
         )
     print(f"The total votes cast: {total_votes}")
+    print(winner)
+    print(winner_name)
+
+
+    # writing the results to analysis
+    text_file_path = "Analysis/Analysis.txt"
+    with open(text_file_path, "w", encoding="UTF-8") as text_file:
+        text_file.write("PyPoll Analysis")
+        text_file.write("\n----------------------------------------")
+        text_file.write("\n" f"The total votes cast: {total_votes}")
+        text_file.write("\n----------------------------------------")
+        text_file.write("\n" f'the winner is {winner_name}')

@@ -1,0 +1,5 @@
+PyPoll Analysis
+----------------------------------------
+The total votes cast: 369711
+----------------------------------------
+the winner is Diana DeGette
